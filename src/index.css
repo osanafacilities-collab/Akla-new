@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --navy: #133E72;
+    --navy-card: #184C8A;
+    --navy-light: #205FA8;
+    --blue: #1A64B4;
+    --gold: #C89B3C;
+    --gold2: #E3BC63;
+    --gold-light: #FDE68A;
+    --white: #ffffff;
+    --light: #F1F5F9;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --line: rgba(200, 155, 60, 0.22);
+    --shadow: 0 18px 50px rgba(19, 62, 114, 0.14);
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-arabic: 'Amiri', serif;
+    --font-script: 'Great Vibes', 'Alex Brush', cursive;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background-color: #F8FAFC;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+}
+
+.font-heading {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-script {
+  font-family: 'Great Vibes', 'Alex Brush', cursive;
+}
+
+.font-arabic {
+  font-family: 'Amiri', serif;
+}
+
+/* Luxury Gold Text Gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #C89B3C 40%, #B8860B 80%, #996515 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes goldShimmerSweep {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gold-shimmer {
+  background: linear-gradient(90deg, #E3BC63 0%, #FFF5D0 30%, #F5D061 50%, #FFEBAA 70%, #C89B3C 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmerSweep 5s ease-in-out infinite;
+}
+
+.text-gold-gradient-light {
+  background: linear-gradient(135deg, #FFF0BE 0%, #F5D061 50%, #E3BC63 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #FAD97A 0%, #E3BC63 50%, #B8860B 100%);
+}
+
+.border-gold-subtle {
+  border-color: rgba(200, 155, 60, 0.25);
+}
+
+.card-luxury {
+  background: #FFFFFF;
+  border: 1px solid rgba(200, 155, 60, 0.25);
+  box-shadow: 0 10px 30px rgba(11, 37, 69, 0.08);
+}
+
+.shadow-gold-glow {
+  box-shadow: 0 0 25px rgba(227, 188, 99, 0.25);
+}
+
+/* Refined Luxury Keyframes */
+@keyframes floatAirplane {
+  0% { transform: translate(-40px, 15px) rotate(-1deg); }
+  50% { transform: translate(25px, -15px) rotate(1.5deg); }
+  100% { transform: translate(90px, -35px) rotate(-0.5deg); }
+}
+
+@keyframes ribbonWave {
+  0% { transform: translateY(0px) scaleY(1); }
+  50% { transform: translateY(-4px) scaleY(1.02); }
+  100% { transform: translateY(0px) scaleY(1); }
+}
+
+@keyframes goldenGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.03); }
+}
+
+@keyframes tradeRouteFlow {
+  from {
+    stroke-dashoffset: 28;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes radarWave {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes gentleFloatReverse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes shimmerSlide {
+  0% {
+    transform: translateX(-120%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-15deg);
+  }
+}
+
+@keyframes infiniteTicker {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes subtleGoldPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(200, 155, 60, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(200, 155, 60, 0);
+  }
+}
+
+/* Luxury Classes */
+.animate-ribbon {
+  animation: ribbonWave 7s ease-in-out infinite;
+}
+
+.animate-golden-glow {
+  animation: goldenGlow 4s ease-in-out infinite;
+}
+
+.animate-trade-flow {
+  animation: tradeRouteFlow 1.6s linear infinite;
+}
+
+.animate-radar {
+  animation: radarWave 2.6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.animate-float {
+  animation: gentleFloat 4.5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: gentleFloatReverse 5s ease-in-out infinite;
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: infiniteTicker 32s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+.pulse-gold {
+  animation: subtleGoldPulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Glass shine on card hover */
+.luxury-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.luxury-sheen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.luxury-sheen:hover::after {
+  left: 180%;
+  transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}

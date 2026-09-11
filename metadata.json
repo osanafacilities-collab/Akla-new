@@ -1,0 +1,6 @@
+{
+  "name": "Akla Foodstuff Trading LLC",
+  "description": "Leading Dubai-based wholesale foodstuff trading company. Reliable bulk importer, exporter, and distributor of premium basmati rice, grains, pulses, spices, edible oils, dry fruits, and commercial food essentials across the UAE, GCC, and global markets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
