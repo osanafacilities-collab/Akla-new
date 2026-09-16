@@ -2,10 +2,10 @@
 
 @layer base {
   :root {
-    --navy: #133E72;
-    --navy-card: #184C8A;
-    --navy-light: #205FA8;
-    --blue: #1A64B4;
+    --navy: #1B5699;
+    --navy-card: #2064B0;
+    --navy-light: #2A79D0;
+    --blue: #2374CE;
     --gold: #C89B3C;
     --gold2: #E3BC63;
     --gold-light: #FDE68A;
@@ -14,7 +14,7 @@
     --text: #0F172A;
     --text-muted: #64748B;
     --line: rgba(200, 155, 60, 0.22);
-    --shadow: 0 18px 50px rgba(19, 62, 114, 0.14);
+    --shadow: 0 18px 50px rgba(27, 86, 153, 0.16);
     --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-arabic: 'Amiri', serif;
@@ -194,6 +194,39 @@
 
 .animate-radar {
   animation: radarWave 2.6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes radarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-radar-sweep {
+  animation: radarSweep 6s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes signalPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(227, 188, 99, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 14px rgba(227, 188, 99, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(227, 188, 99, 0);
+  }
+}
+
+.animate-signal-pulse {
+  animation: signalPulse 2.2s infinite;
 }
 
 .animate-float {

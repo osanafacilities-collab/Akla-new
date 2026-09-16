@@ -87,6 +87,26 @@ export const SPOT_COMMODITY_INDICES: SpotCommodityIndex[] = [
     change24h: -0.3,
     trend: 'down',
     packaging: '50kg Polylined Bags'
+  },
+  {
+    symbol: 'CHKN-GRLR-HL',
+    name: 'Frozen Whole Chicken Griller (Halal)',
+    origin: 'Brazil (SIF Plants)',
+    fobPort: 'CIF Jebel Ali Reefer',
+    priceUsdPerMt: 2150,
+    change24h: 1.4,
+    trend: 'up',
+    packaging: '10x1.1kg Master Carton'
+  },
+  {
+    symbol: 'BEEF-BONELESS-HL',
+    name: 'Boneless Halal Beef Cuts (Silver Side)',
+    origin: 'Brazil / India',
+    fobPort: 'CIF Jebel Ali Reefer',
+    priceUsdPerMt: 4100,
+    change24h: 0.9,
+    trend: 'up',
+    packaging: '20kg Master Cartons'
   }
 ];
 
@@ -162,13 +182,13 @@ export const COMPANY_INFO = {
   established: 2011,
   
   headOffice: {
-    title: 'Commercial Head Office & Commodity Trading Room',
-    address: 'Suite 408, Al Ras Wholesale Food Market Complex, Baniyas Road, Deira',
+    title: 'Commercial Head Office & Commodity Trading Desk',
+    address: 'Al Quoz Industrial Area, Dubai',
     city: 'Dubai',
     country: 'United Arab Emirates',
     poBox: 'P.O. Box 84920, Dubai, UAE',
     workingHours: 'Sunday – Friday: 8:00 AM – 6:30 PM (GST UTC+4)',
-    latLng: '25.2697° N, 55.2974° E'
+    latLng: '25.1432° N, 55.2341° E'
   },
   
   logisticsHub: {

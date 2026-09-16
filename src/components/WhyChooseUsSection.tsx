@@ -65,7 +65,7 @@ export const WhyChooseUsSection: React.FC = () => {
   ];
 
   return (
-    <section id="why" className="py-24 lg:py-32 bg-white border-b border-[#E2E8F0] text-[#0F172A] relative overflow-hidden">
+    <section id="why" className="scroll-mt-24 py-24 lg:py-32 bg-white border-b border-[#E2E8F0] text-[#0F172A] relative overflow-hidden">
       {/* Subtle ambient warm lighting accents */}
       <div className="absolute top-1/3 right-0 w-[450px] h-[450px] bg-[#C89B3C]/5 rounded-full filter blur-[120px] pointer-events-none" />
 
@@ -77,7 +77,7 @@ export const WhyChooseUsSection: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5 text-[#C89B3C]" />
             <span>THE AKLA ADVANTAGE</span>
           </div>
-          <h2 className="text-[34px] sm:text-[46px] lg:text-[54px] leading-[1.08] tracking-tight font-heading font-black text-[#133E72]">
+          <h2 className="text-[34px] sm:text-[46px] lg:text-[54px] leading-[1.08] tracking-tight font-heading font-black text-[#1B5699]">
             Built on Quality, Reliability &amp; <span className="text-gold-gradient">Partnership</span>
           </h2>
           <p className="text-base sm:text-[17px] text-[#475569] leading-relaxed mx-auto max-w-2xl">
@@ -95,7 +95,7 @@ export const WhyChooseUsSection: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: idx * 0.07, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -6, scale: 1.015 }}
-              className="p-8 sm:p-9 bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] shadow-[0_4px_20px_rgba(19,62,114,0.05)] transition-all duration-300 hover:border-[#C89B3C] hover:shadow-[0_16px_35px_rgba(200,155,60,0.15)] group relative flex flex-col justify-between luxury-sheen"
+              className="p-8 sm:p-9 bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] shadow-[0_4px_20px_rgba(27,86,153,0.05)] transition-all duration-300 hover:border-[#C89B3C] hover:shadow-[0_16px_35px_rgba(200,155,60,0.15)] group relative flex flex-col justify-between luxury-sheen"
             >
               {/* Header row with Icon and Numeric badge */}
               <div>
@@ -108,7 +108,7 @@ export const WhyChooseUsSection: React.FC = () => {
                   </span>
                 </div>
 
-                <h3 className="text-[19px] font-heading font-bold text-[#133E72] mb-2.5 group-hover:text-[#C89B3C] transition-colors">
+                <h3 className="text-[19px] font-heading font-bold text-[#1B5699] mb-2.5 group-hover:text-[#C89B3C] transition-colors">
                   {item.title}
                 </h3>
 
@@ -119,7 +119,7 @@ export const WhyChooseUsSection: React.FC = () => {
 
               {/* Bottom metric tag with animated numbers */}
               <div className="pt-5 mt-5 border-t border-[#E2E8F0] flex items-center justify-between text-xs">
-                <span className="font-bold text-[#133E72] flex items-center gap-1.5">
+                <span className="font-bold text-[#1B5699] flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-[#C89B3C] stroke-[3]" />
                   <span>{item.metricNode}</span>
                 </span>

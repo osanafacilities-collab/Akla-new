@@ -15,7 +15,7 @@ export const CtaSection: React.FC<CtaSectionProps> = ({
     <section 
       className="py-28 text-white text-center relative overflow-hidden bg-cover bg-center border-y border-[#C89B3C]/40 luxury-sheen"
       style={{
-        backgroundImage: `linear-gradient(135deg, rgba(19,62,114,0.94) 0%, rgba(22,78,136,0.90) 50%, rgba(16,53,94,0.96) 100%), url("https://images.unsplash.com/photo-1566576912327-7d3c7b4c5f0c?auto=format&fit=crop&w=1800&q=85")`
+        backgroundImage: `linear-gradient(135deg, rgba(27,86,153,0.94) 0%, rgba(33,103,180,0.90) 50%, rgba(23,77,137,0.96) 100%), url("https://images.unsplash.com/photo-1566576912327-7d3c7b4c5f0c?auto=format&fit=crop&w=1800&q=85")`
       }}
     >
       {/* Ambient gold glow pulsing */}
@@ -87,7 +87,7 @@ export const CtaSection: React.FC<CtaSectionProps> = ({
             whileTap={{ scale: 0.97 }}
             type="button"
             onClick={onNavigateContact}
-            className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#0B2545]/80 hover:bg-[#C89B3C]/20 border border-[#C89B3C]/75 hover:border-[#E3BC63] text-white rounded-full font-bold text-xs tracking-wider uppercase transition-all backdrop-blur-md cursor-pointer"
+            className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#1B5699]/80 hover:bg-[#C89B3C]/20 border border-[#C89B3C]/75 hover:border-[#E3BC63] text-white rounded-full font-bold text-xs tracking-wider uppercase transition-all backdrop-blur-md cursor-pointer"
           >
             <PhoneCall className="w-4 h-4 text-[#E3BC63]" />
             <span>CONTACT OUR TRADE DESK</span>

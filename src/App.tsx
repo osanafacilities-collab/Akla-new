@@ -15,6 +15,10 @@ import { ProductDetailModal } from './components/ProductDetailModal';
 import { QuoteModal } from './components/QuoteModal';
 import { Product } from './types';
 import { motion, AnimatePresence } from 'motion/react';
+import { VisualEditorBar } from './components/editor/VisualEditorBar';
+import { ContentManagerDrawer } from './components/editor/ContentManagerDrawer';
+import { ImageUploadModal } from './components/editor/ImageUploadModal';
+import { AnimationStudioModal } from './components/editor/AnimationStudioModal';
 
 export default function App() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -41,10 +45,23 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    const elem = document.getElementById(sectionId);
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
+
+    const scrollToTarget = () => {
+      const elem = document.getElementById(sectionId);
+      if (elem) {
+        const headerOffset = 85;
+        const elementPosition = elem.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: 'smooth',
+        });
+      }
+    };
+
+    // Execute immediately and once more shortly after to counteract mobile drawer collapse
+    scrollToTarget();
+    setTimeout(scrollToTarget, 160);
   };
 
   return (
@@ -88,8 +105,8 @@ export default function App() {
           onExploreProducts={() => handleNavigate('products')}
         />
 
-        {/* 6. Global Trade Section (#global) with Interactive Map */}
-        <GlobalTradeSection />
+        {/* 6. Global Trade Section (#global) - Supply Chain & Sourcing Infrastructure */}
+        <GlobalTradeSection onOpenQuote={(cat) => handleOpenQuote(undefined, cat)} />
 
         {/* 7. Why Choose Us Section (#why) */}
         <WhyChooseUsSection />
@@ -137,6 +154,14 @@ export default function App() {
           />
         )}
       </AnimatePresence>
+
+      {/* ========================================================================= */}
+      {/* 12. AKLA FULL VISUAL CMS & ANIMATION SUITE */}
+      {/* ========================================================================= */}
+      <VisualEditorBar />
+      <ContentManagerDrawer />
+      <ImageUploadModal />
+      <AnimationStudioModal />
     </div>
   );
 }

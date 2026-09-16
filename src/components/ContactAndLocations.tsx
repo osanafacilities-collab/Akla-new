@@ -56,7 +56,7 @@ export const ContactAndLocations: React.FC = () => {
             Commercial Offices &amp; Distribution Center
           </h2>
           <p className="text-xs sm:text-sm text-[#52665B] leading-relaxed">
-            Visit our commercial sales room in Deira Al Ras or contact our trade desk to schedule a warehouse commodity inspection in DIP.
+            Visit our commercial office in Al Quoz, Dubai or contact our trade desk to schedule a warehouse commodity inspection.
           </p>
         </div>
 
@@ -76,7 +76,7 @@ export const ContactAndLocations: React.FC = () => {
                   <span>Commercial Head Office</span>
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#EDE5D6] text-[#423315] border border-[#D5CABB]">
-                  Deira Al Ras
+                  Al Quoz, Dubai
                 </span>
               </div>
               <h4 className="font-heading text-base font-bold text-[#0D1C15]">

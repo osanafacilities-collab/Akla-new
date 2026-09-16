@@ -1,0 +1,108 @@
+{
+  "company": {
+    "name": "Akla Foodstuff Trading LLC",
+    "arabicName": "عقلا لتجارة المواد الغذائية ذ.م.م",
+    "tagline": "Premium Global Food Commodities & Institutional Supply",
+    "commercialLicenseNo": "658932 (Dubai DED)",
+    "dubaiChamberNo": "239108",
+    "vatTrn": "100348291000003",
+    "mirsalCustomsCode": "AE-7729104",
+    "dpWorldTerminalCode": "DPW-DXB-9921",
+    "headOfficeAddress": "Office 402, Al Quoz Commercial Tower, Sheikh Zayed Road, Dubai, UAE",
+    "headOfficeHours": "Monday – Friday: 08:00 – 18:00 GST | Saturday: 08:30 – 14:00 GST",
+    "logisticsHubAddress": "Warehouse Cluster 8, Al Quoz Industrial Area 3, Dubai, UAE",
+    "logisticsHubCapacity": "85,000 Sq. Ft Multi-Temperature Cold Chain Facility",
+    "generalPhone": "+971 4 347 8892",
+    "mobileTradeWhatsapp": "+971 50 892 4410",
+    "salesEmail": "sales@aklafoodstuff.com",
+    "tradeDeskEmail": "procurement@aklafoodstuff.com",
+    "complianceEmail": "compliance@aklafoodstuff.com"
+  },
+  "hero": {
+    "badge": "Direct Mill Procurement & GCC Hub",
+    "titleLine1": "Your Trusted Partner in",
+    "titleLine2": "Global Food Trading",
+    "bullet1": "Quality Products",
+    "bullet2": "Competitive Prices",
+    "bullet3": "Reliable Supply",
+    "description": "Akla Foodstuff Trading LLC is a Dubai-based food trading company specializing in wholesale and retail distribution of high-quality food products for local and international markets.",
+    "btn1Text": "Explore Our Products",
+    "btn2Text": "Request a Quote",
+    "bgImage": "/hero-dubai-trade.jpg",
+    "floatingCard1Title": "Direct Mill Procurement",
+    "floatingCard1Sub": "100% Quality Inspected",
+    "floatingCard2Title": "Fast-Track Logistics",
+    "floatingCard2Sub": "Jebel Ali Berth • 48h Transit",
+    "pillar1Title": "Premium Quality",
+    "pillar1Sub": "Products",
+    "pillar2Title": "Wholesale & Retail",
+    "pillar2Sub": "Supply",
+    "pillar3Title": "Global Import & Export",
+    "pillar3Sub": "Network",
+    "pillar4Title": "Trusted by Businesses",
+    "pillar4Sub": "Worldwide"
+  },
+  "about": {
+    "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85",
+    "badge": "ABOUT AKLA FOODSTUFF",
+    "title": "Connecting Continents, Sourcing Purity",
+    "subtitle": "Strategically headquartered in Dubai, bridging top agro-producers with GCC & Middle East markets.",
+    "titleLine1": "Your Reliable Partner in",
+    "titleLine2": "Global Food Trading",
+    "desc1": "Akla Foodstuff Trading LLC is a Dubai-based food trading company supplying quality products to businesses, institutional buyers and consumers across the UAE and international markets.",
+    "desc2": "Our comprehensive portfolio covers essential food categories including grains, cereals, legumes, fresh fruits and vegetables, beverages, snacks, flour, eggs, ghee, edible oils, and selected seafood products.",
+    "leadStory": "Akla Foodstuff Trading LLC was established with a singular vision: to deliver wholesale transparency, certified food safety, and dependable agro-commodity logistics across the GCC and global trade corridors.",
+    "secondaryStory": "From farm gates and automated milling facilities in Southeast Asia, Australia, Brazil, and Europe, we manage unbroken temperature-monitored supply chains directly through Jebel Ali Port to your retail shelves and commercial kitchens.",
+    "stat1Number": "45+",
+    "stat1Label": "Global Trade Network",
+    "stat1Sub": "Import Origins & Export Ports",
+    "stat2Number": "3,800+",
+    "stat2Label": "Monthly Throughput",
+    "stat2Sub": "Metric Tons (MT) Shipped",
+    "stat3Number": "85,000",
+    "stat3Label": "Logistics Facility",
+    "stat3Sub": "Sq. Ft Climate-Controlled Hub",
+    "stat4Number": "24-48h",
+    "stat4Label": "Fast Customs Transit",
+    "stat4Sub": "Mirsal II & Bonded Re-Export"
+  },
+  "wholesale": {
+    "badge": "COMMERCIAL WHOLESALE DIVISION",
+    "title": "Wholesale Solutions Built for Enterprise",
+    "description": "Supplying hypermarkets, hotel conglomerates, commercial kitchens, flight caterers, and regional GCC distributors with bulk container volumes and guaranteed supply continuity.",
+    "bgImage": "/wholesale.jpg"
+  },
+  "retail": {
+    "badge": "RETAIL DISTRIBUTION DIVISION",
+    "title": "Quality Products for Everyday Needs",
+    "description": "Curated consumer-packaged food ranges designed for grocery store shelves, specialty food boutiques, and convenience markets demanding quality aesthetics and dependable sell-through.",
+    "bgImage": "https://images.unsplash.com/photo-1601598851547-4302969d0614?auto=format&fit=crop&w=1200&q=85"
+  },
+  "wholesaleSplit": {
+    "badge": "Integrated Distribution Channels",
+    "title": "Engineered for Both Scale & Consumer Agility",
+    "subtitle": "Supplying bulk institutional supply chains, private label packaging, and branded retail supermarkets.",
+    "wholesaleHeading": "B2B Wholesale & Institutional Supply",
+    "wholesaleLead": "Full container loads (FCL), 25kg–50kg bulk packaging, and customized private-label milling for hypermarkets, hotel chains, ship chandlers, and government food reserves.",
+    "retailHeading": "Retail & Consumer Packaged Goods (CPG)",
+    "retailLead": "1kg–5kg premium shelf-ready retail formats, moisture-proof zipper pouches, and customized branding tailored to local regulatory labeling and barcode compliance."
+  },
+  "whyChooseUs": {
+    "badge": "The Akla Advantage",
+    "title": "Why Global Importers & Retailers Trust Us",
+    "subtitle": "Rigorous laboratory compliance, unbroken cold chains, and flexible trade finance credit solutions."
+  },
+  "cta": {
+    "title": "Ready to Streamline Your Food Supply Chain?",
+    "subtitle": "Connect with our commodity trade specialists in Al Quoz, Dubai for immediate spot FOB/CIF pricing, laboratory spec sheets, and bonded logistics coordination.",
+    "btnText": "Request Spot Quote Now"
+  },
+  "customImages": {},
+  "animations": {
+    "enabled": true,
+    "preset": "cinematic",
+    "speed": "normal",
+    "particles": true,
+    "hoverPhysics": "lift"
+  }
+}

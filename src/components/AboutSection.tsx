@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Award, Sparkles, Check, TrendingUp, ShieldCheck, Factory, Truck } from 'lucide-react';
+import { Award, Sparkles, Check, TrendingUp, ShieldCheck, Factory, Truck, Camera } from 'lucide-react';
 import { AnimatedCounter } from './AnimatedCounter';
+import { useSiteEditor } from '../context/SiteEditorContext';
+import { EditableText } from './editor/EditableText';
 
 export const AboutSection: React.FC = () => {
+  const { content, isEditMode, openImagePicker } = useSiteEditor();
   const [activeTab, setActiveTab] = useState<'sourcing' | 'logistics' | 'certification'>('sourcing');
 
   const stats = [
@@ -41,10 +44,10 @@ export const AboutSection: React.FC = () => {
   };
 
   return (
-    <section id="about" className="py-24 lg:py-32 bg-white relative border-b border-[#E2E8F0] text-[#0F172A] overflow-hidden">
+    <section id="about" className="scroll-mt-24 py-24 lg:py-32 bg-white relative border-b border-[#E2E8F0] text-[#0F172A] overflow-hidden">
       {/* Subtle ambient warm lighting accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C89B3C]/5 rounded-full filter blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#133E72]/5 rounded-full filter blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#1B5699]/8 rounded-full filter blur-[140px] pointer-events-none" />
 
       <div className="max-w-[1380px] w-[92%] mx-auto space-y-20 relative z-10">
         
@@ -57,20 +60,32 @@ export const AboutSection: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="h-[460px] sm:h-[540px] relative rounded-2xl overflow-hidden bg-cover bg-center border border-[#E2E8F0] shadow-[0_20px_50px_rgba(19,62,114,0.12)] group"
+            className="h-[460px] sm:h-[540px] relative rounded-2xl overflow-hidden bg-cover bg-center border border-[#E2E8F0] shadow-[0_20px_50px_rgba(27,86,153,0.12)] group"
             style={{
-              backgroundImage: `url("https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85")`
+              backgroundImage: `url("${content.about.image || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85'}")`
             }}
           >
             {/* Subtle natural gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#133E72]/90 via-[#133E72]/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1B5699]/90 via-[#1B5699]/20 to-transparent" />
             <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#C89B3C]/60 transition-colors rounded-2xl pointer-events-none" />
+
+            {/* Change About Photo Button in Edit Mode */}
+            {isEditMode && (
+              <button
+                type="button"
+                onClick={() => openImagePicker('about.image', content.about.image || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85', 'About Section Photo')}
+                className="absolute top-4 right-4 z-20 px-3 py-1.5 bg-[#071A2F]/90 hover:bg-[#1B5699] text-[#FDE68A] border border-[#C89B3C] rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-md cursor-pointer transition-all hover:scale-105"
+              >
+                <Camera className="w-3.5 h-3.5" />
+                <span>Change Photo</span>
+              </button>
+            )}
 
             {/* Floating Luxury Quality Badge with subtle float animation */}
             <motion.div 
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute z-10 bottom-6 sm:bottom-8 left-6 sm:left-8 bg-[#133E72]/95 backdrop-blur-xl text-white py-5 px-7 min-w-[240px] rounded-2xl shadow-[0_15px_40px_rgba(19,62,114,0.4)] border border-[#C89B3C]/60"
+              className="absolute z-10 bottom-6 sm:bottom-8 left-6 sm:left-8 bg-[#1B5699]/95 backdrop-blur-xl text-white py-5 px-7 min-w-[240px] rounded-2xl shadow-[0_15px_40px_rgba(27,86,153,0.38)] border border-[#C89B3C]/60"
             >
               <div className="flex items-center gap-2 text-[#E3BC63] text-xs font-black uppercase tracking-wider mb-1">
                 <Award className="w-4 h-4 text-[#E3BC63]" />
@@ -96,24 +111,32 @@ export const AboutSection: React.FC = () => {
             {/* Kicker */}
             <div className="inline-flex items-center gap-2 text-[#C89B3C] font-black tracking-[2.5px] text-xs uppercase px-3.5 py-1.5 rounded-full bg-[#FFF8EB] border border-[#F5D061]/60 shadow-xs">
               <Sparkles className="w-3.5 h-3.5 text-[#C89B3C]" />
-              <span>ABOUT AKLA FOODSTUFF</span>
+              <EditableText path="about.badge" defaultText="ABOUT AKLA FOODSTUFF" as="span" />
             </div>
 
             {/* Heading */}
-            <h2 className="text-[34px] sm:text-[46px] lg:text-[54px] leading-[1.08] tracking-tight font-heading font-black text-[#133E72]">
-              Your Reliable Partner in <br />
-              <span className="text-gold-gradient">Global Food Trading</span>
+            <h2 className="text-[34px] sm:text-[46px] lg:text-[54px] leading-[1.08] tracking-tight font-heading font-black text-[#1B5699]">
+              <EditableText path="about.titleLine1" defaultText="Your Reliable Partner in" as="span" className="block" />
+              <EditableText path="about.titleLine2" defaultText="Global Food Trading" as="span" className="text-gold-gradient block" />
             </h2>
 
             {/* Lead paragraph */}
-            <p className="text-[17px] sm:text-[18px] text-[#334155] leading-relaxed font-medium">
-              Akla Foodstuff Trading LLC is a Dubai-based food trading company supplying quality products to businesses, institutional buyers and consumers across the UAE and international markets.
-            </p>
+            <EditableText 
+              path="about.desc1" 
+              defaultText="Akla Foodstuff Trading LLC is a Dubai-based food trading company supplying quality products to businesses, institutional buyers and consumers across the UAE and international markets." 
+              as="p" 
+              multiline 
+              className="text-[17px] sm:text-[18px] text-[#334155] leading-relaxed font-medium block" 
+            />
 
             {/* Subparagraph */}
-            <p className="text-[14.5px] sm:text-[15.5px] text-[#64748B] leading-relaxed">
-              Our comprehensive portfolio covers essential food categories including grains, cereals, legumes, fresh fruits and vegetables, beverages, snacks, flour, eggs, ghee, edible oils, and selected seafood products.
-            </p>
+            <EditableText 
+              path="about.desc2" 
+              defaultText="Our comprehensive portfolio covers essential food categories including grains, cereals, legumes, fresh fruits and vegetables, beverages, snacks, flour, eggs, ghee, edible oils, and selected seafood products." 
+              as="p" 
+              multiline 
+              className="text-[14.5px] sm:text-[15.5px] text-[#64748B] leading-relaxed block" 
+            />
 
             {/* Checks Grid with animated hover bounce */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-4 border-t border-[#E2E8F0]">
@@ -129,11 +152,6 @@ export const AboutSection: React.FC = () => {
                   <span>{check}</span>
                 </motion.div>
               ))}
-            </div>
-
-            {/* Location footnote */}
-            <div className="pt-2 text-xs text-[#64748B]">
-              Commercial Trade License No: CN-8947213 &bull; Registered with Dubai Chamber of Commerce
             </div>
           </motion.div>
 
@@ -151,7 +169,7 @@ export const AboutSection: React.FC = () => {
               whileHover={{ y: -5 }}
               className="bg-[#F8FAFC] border border-[#E2E8F0] p-6 rounded-2xl shadow-[0_4px_20px_rgba(19,62,114,0.06)] hover:border-[#C89B3C] hover:shadow-[0_12px_30px_rgba(200,155,60,0.18)] transition-all group luxury-sheen"
             >
-              <div className="text-3xl sm:text-4xl font-black font-heading text-[#133E72] group-hover:text-[#C89B3C] transition-colors flex items-baseline">
+              <div className="text-3xl sm:text-4xl font-black font-heading text-[#1B5699] group-hover:text-[#C89B3C] transition-colors flex items-baseline">
                 <AnimatedCounter to={s.value} suffix={s.suffix} duration={2.2} />
               </div>
               <div className="text-sm font-bold text-[#1E293B] mt-1.5">
@@ -169,7 +187,7 @@ export const AboutSection: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E2E8F0]">
             <div>
               <span className="text-xs font-black uppercase tracking-wider text-[#C89B3C]">HOW WE OPERATE</span>
-              <h3 className="text-xl sm:text-2xl font-black font-heading text-[#133E72] mt-0.5">Operational Pillars of Akla</h3>
+              <h3 className="text-xl sm:text-2xl font-black font-heading text-[#1B5699] mt-0.5">Operational Pillars of Akla</h3>
             </div>
 
             {/* Tab Switches */}
@@ -181,8 +199,8 @@ export const AboutSection: React.FC = () => {
                   onClick={() => setActiveTab(tab)}
                   className={`px-4 py-2 rounded-lg text-xs font-bold capitalize transition-all cursor-pointer ${
                     activeTab === tab 
-                      ? 'bg-[#133E72] text-white shadow-sm' 
-                      : 'text-[#64748B] hover:text-[#133E72]'
+                      ? 'bg-[#1B5699] text-white shadow-sm' 
+                      : 'text-[#64748B] hover:text-[#1B5699]'
                   }`}
                 >
                   {tab}
@@ -204,7 +222,7 @@ export const AboutSection: React.FC = () => {
                 {tabsContent[activeTab].icon}
               </div>
               <div>
-                <h4 className="text-base sm:text-lg font-bold text-[#133E72]">
+                <h4 className="text-base sm:text-lg font-bold text-[#1B5699]">
                   {tabsContent[activeTab].title}
                 </h4>
                 <p className="text-sm text-[#475569] leading-relaxed mt-1 max-w-3xl">

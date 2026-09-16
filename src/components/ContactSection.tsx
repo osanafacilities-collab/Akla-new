@@ -35,8 +35,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledCategor
   };
 
   return (
-    <section id="contact" className="py-24 lg:py-32 bg-[#F8FAFC] text-[#0F172A] border-b border-[#E2E8F0] relative">
-      <div className="max-w-[1380px] w-[92%] mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+    <section id="contact" className="scroll-mt-24 py-16 sm:py-24 lg:py-32 bg-[#F8FAFC] text-[#0F172A] border-b border-[#E2E8F0] relative">
+      <div className="max-w-[1380px] w-[92%] mx-auto grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
         
         {/* Left: Contact Info Card in Prestigious Royal Navy */}
         <motion.div
@@ -44,7 +44,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledCategor
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-gradient-to-br from-[#133E72] via-[#164D87] to-[#10355E] p-8 sm:p-12 rounded-2xl border border-[#C89B3C]/45 shadow-[0_20px_50px_rgba(19,62,114,0.25)] text-white space-y-7 luxury-sheen"
+          className="bg-gradient-to-br from-[#1B5699] via-[#2167B4] to-[#174D89] p-6 sm:p-10 lg:p-12 rounded-2xl border border-[#C89B3C]/45 shadow-[0_20px_50px_rgba(27,86,153,0.25)] text-white space-y-6 sm:space-y-7 luxury-sheen"
         >
           <div className="inline-flex items-center gap-2 text-[#E3BC63] font-black tracking-[2.5px] text-xs uppercase px-3.5 py-1.5 rounded-full bg-[#E3BC63]/15 border border-[#E3BC63]/40">
             <Sparkles className="w-3.5 h-3.5 text-[#E3BC63]" />
@@ -62,7 +62,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledCategor
           <div className="space-y-6 pt-4 border-t border-white/10">
             {/* Location */}
             <div className="flex items-start gap-4">
-              <div className="w-11 h-11 rounded-full bg-[#1A5393] border border-[#E3BC63]/50 text-[#E3BC63] flex items-center justify-center shrink-0 shadow-sm">
+              <div className="w-11 h-11 rounded-full bg-[#246FB7] border border-[#E3BC63]/50 text-[#E3BC63] flex items-center justify-center shrink-0 shadow-sm">
                 <MapPin className="w-5 h-5 text-[#E3BC63]" />
               </div>
               <div>
@@ -73,14 +73,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledCategor
                   Dubai, United Arab Emirates
                 </span>
                 <span className="text-xs text-[#94A3B8] block mt-0.5">
-                  Commercial Offices: Deira &bull; Central Logistics Hub: DIP-2
+                  Commercial Office: Al Quoz, Dubai &bull; Central UAE Warehousing
                 </span>
               </div>
             </div>
 
             {/* Direct Phone & WhatsApp */}
             <div className="flex items-start gap-4">
-              <div className="w-11 h-11 rounded-full bg-[#1A5393] border border-[#E3BC63]/50 text-[#E3BC63] flex items-center justify-center shrink-0 shadow-sm">
+              <div className="w-11 h-11 rounded-full bg-[#246FB7] border border-[#E3BC63]/50 text-[#E3BC63] flex items-center justify-center shrink-0 shadow-sm">
                 <Phone className="w-5 h-5 text-[#E3BC63]" />
               </div>
               <div>
@@ -101,7 +101,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledCategor
 
             {/* Email */}
             <div className="flex items-start gap-4">
-              <div className="w-11 h-11 rounded-full bg-[#1A5393] border border-[#E3BC63]/50 text-[#E3BC63] flex items-center justify-center shrink-0 shadow-sm">
+              <div className="w-11 h-11 rounded-full bg-[#246FB7] border border-[#E3BC63]/50 text-[#E3BC63] flex items-center justify-center shrink-0 shadow-sm">
                 <Mail className="w-5 h-5 text-[#E3BC63]" />
               </div>
               <div>
@@ -142,18 +142,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledCategor
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-white p-8 sm:p-12 rounded-2xl border border-[#E2E8F0] shadow-[0_20px_50px_rgba(11,37,69,0.08)]"
+          className="bg-white p-6 sm:p-10 lg:p-12 rounded-2xl border border-[#E2E8F0] shadow-[0_20px_50px_rgba(27,86,153,0.08)]"
         >
           <div className="inline-flex items-center gap-2 text-[#C89B3C] font-black tracking-[2.5px] text-xs uppercase px-3.5 py-1.5 rounded-full bg-[#FFF8EB] border border-[#F5D061]/60 shadow-xs mb-3">
             <span>QUOTATION REQUEST</span>
           </div>
 
-          <h2 className="text-[28px] sm:text-[34px] leading-tight font-heading font-black text-[#0B2545] mb-4">
+          <h2 className="text-[26px] sm:text-[32px] lg:text-[34px] leading-tight font-heading font-black text-[#1B5699] mb-3">
             Tell Us What You Need
           </h2>
 
           {/* Trade Desk Response Guarantee Pill */}
-          <div className="flex items-center gap-2 text-xs text-[#133E72] font-bold bg-[#F8FAFC] border border-[#C89B3C]/40 px-3.5 py-2 rounded-xl mb-6 shadow-2xs">
+          <div className="flex items-center gap-2 text-xs text-[#1B5699] font-bold bg-[#F8FAFC] border border-[#C89B3C]/40 px-3.5 py-2 rounded-xl mb-5 shadow-2xs">
             <span>Fast-Track Desk: Average quote response &lt; 2 business hours</span>
           </div>
 
@@ -162,11 +162,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledCategor
               <div className="w-16 h-16 bg-[#1f9d55]/15 text-[#1f9d55] border border-[#1f9d55]/30 rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="font-heading font-black text-2xl text-[#0B2545]">
+              <h3 className="font-heading font-black text-2xl text-[#1B5699]">
                 Trade Enquiry Received
               </h3>
               <p className="text-sm text-[#64748B] max-w-md mx-auto leading-relaxed">
-                Thank you, <strong className="text-[#0B2545]">{fullName}</strong>. Your requirement has been logged under Reference ID <strong className="text-[#C89B3C]">{referenceId}</strong>. Our Dubai trade desk will review logistics and reach out via WhatsApp/email within 4 business hours.
+                Thank you, <strong className="text-[#1B5699]">{fullName}</strong>. Your requirement has been logged under Reference ID <strong className="text-[#C89B3C]">{referenceId}</strong>. Our Dubai trade desk will review logistics and reach out via WhatsApp/email within 4 business hours.
               </p>
               <button
                 type="button"
@@ -268,6 +268,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledCategor
                     className="w-full px-4 py-3 border border-[#E2E8F0] bg-[#F8FAFC] rounded-xl text-sm text-[#0F172A] focus:outline-hidden focus:border-[#C89B3C] focus:bg-white cursor-pointer"
                   >
                     <option>Grains &amp; Legumes</option>
+                    <option>Chicken &amp; Halal Meat Trading</option>
                     <option>Food &amp; Beverages</option>
                     <option>Fresh Fruits &amp; Vegetables</option>
                     <option>Ghee &amp; Oils</option>

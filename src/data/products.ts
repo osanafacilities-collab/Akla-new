@@ -1,8 +1,9 @@
 import { Product } from '../types';
 
 export const CATEGORIES = [
-  { id: 'all', name: 'All Commodities', arabicName: 'جميع السلع', count: 12 },
+  { id: 'all', name: 'All Commodities', arabicName: 'جميع السلع', count: 16 },
   { id: 'rice-grains', name: 'Rice & Grains', arabicName: 'الأرز والحبوب', count: 4 },
+  { id: 'poultry-meat', name: 'Chicken & Meat', arabicName: 'الدواجن واللحوم', count: 4 },
   { id: 'pulses-legumes', name: 'Pulses & Lentils', arabicName: 'البقوليات والعدس', count: 3 },
   { id: 'spices-herbs', name: 'Spices & Seasonings', arabicName: 'التوابل والبهارات', count: 3 },
   { id: 'edible-oils', name: 'Edible Oils & Sugar', arabicName: 'الزيوت والسكر', count: 2 },
@@ -31,7 +32,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Halal Certified', 'HACCP', 'ISO 22000', 'Dubai Municipality Approved', 'Phytosanitary Clean'],
     referencePriceAedPerKg: 4.80,
-    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=85',
     featured: true,
     stockStatus: 'Ready DIP Stock'
   },
@@ -55,7 +56,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Halal Certified', 'FSSAI Export Grade', 'SGS Pre-Shipment Tested'],
     referencePriceAedPerKg: 4.65,
-    image: 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?auto=format&fit=crop&w=800&q=85',
     featured: true,
     stockStatus: 'Direct Mill FCL'
   },
@@ -79,7 +80,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Thai Hom Mali Seal of Authenticity', 'Halal', 'GMP Certified'],
     referencePriceAedPerKg: 5.20,
-    image: 'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=800&q=85',
     featured: false,
     stockStatus: 'Ready DIP Stock'
   },
@@ -102,7 +103,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Halal', 'HACCP', 'ESMA Verified'],
     referencePriceAedPerKg: 2.30,
-    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=85',
     featured: false,
     stockStatus: 'Ready DIP Stock'
   },
@@ -126,7 +127,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Phytosanitary Certified', 'Halal', 'Dubai Municipality Monitored'],
     referencePriceAedPerKg: 4.60,
-    image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=800&q=85',
     featured: true,
     stockStatus: 'Ready DIP Stock'
   },
@@ -150,7 +151,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Halal', 'Non-GMO', 'HACCP'],
     referencePriceAedPerKg: 3.80,
-    image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85',
     featured: true,
     stockStatus: 'Ready DIP Stock'
   },
@@ -174,7 +175,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Halal', 'ISO 22000'],
     referencePriceAedPerKg: 4.20,
-    image: 'https://images.unsplash.com/photo-1587486913049-53fc88980cfc?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&w=800&q=85',
     featured: false,
     stockStatus: 'Direct Mill FCL'
   },
@@ -199,7 +200,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Halal', 'HACCP', 'Phytosanitary Clean'],
     referencePriceAedPerKg: 115.00,
-    image: 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=85',
     featured: true,
     stockStatus: 'Ready DIP Stock'
   },
@@ -223,7 +224,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Halal', 'ASTA Compliant', 'ISO 22000'],
     referencePriceAedPerKg: 28.50,
-    image: 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=800&q=85',
     featured: false,
     stockStatus: 'Ready DIP Stock'
   },
@@ -247,7 +248,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Halal', 'HACCP', 'ESMA Verified'],
     referencePriceAedPerKg: 22.00,
-    image: 'https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=85',
     featured: true,
     stockStatus: 'Ready DIP Stock'
   },
@@ -271,7 +272,7 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['Halal Certified', 'ESMA UAE Quality Mark', 'HACCP', 'GSO Compliant'],
     referencePriceAedPerKg: 5.40,
-    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=85',
     featured: true,
     stockStatus: 'Direct Mill FCL'
   },
@@ -295,7 +296,154 @@ export const PRODUCTS: Product[] = [
     },
     certifications: ['SGS Pre-Loading Inspection', 'Halal', 'ISO 9001:2015'],
     referencePriceAedPerKg: 2.75,
-    image: 'https://images.unsplash.com/photo-1587735243615-c03f25aaff15?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1581441363689-1f3c3c414635?auto=format&fit=crop&w=800&q=85',
+    featured: true,
+    stockStatus: 'Direct Mill FCL'
+  },
+  {
+    id: 'kachi-ghani-mustard-oil',
+    name: 'Pure Kachi Ghani Mustard Oil',
+    arabicName: 'زيت خردل نقي معصور على البارد',
+    category: 'edible-oils',
+    origin: 'India',
+    grade: 'Cold Pressed / 100% Pure Virgin Grade',
+    moq: '5 Metric Tons (or mixed FCL)',
+    packagingOptions: ['1L & 5L PET Bottle', '15L Metal Tin', '200L Steel Drum'],
+    shelfLife: '24 Months',
+    hsCode: '1514.91.00',
+    description: 'Traditional authentic cold-pressed Kachi Ghani mustard oil extracted from premium grade mustard seeds. Naturally rich in Omega-3 and pungency, strictly tested for low erucic acid compliance.',
+    specs: {
+      processing: 'Cold Pressed Virgin First Extraction',
+      purity: '100% Pure Mustard Seed Oil',
+      color: 'Golden Amber Yellow',
+      moisture: 'Max 0.2%'
+    },
+    certifications: ['FSSAI Export Approved', 'Halal Certified', 'ESMA Compliant'],
+    referencePriceAedPerKg: 6.80,
+    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=85',
+    featured: true,
+    stockStatus: 'Ready DIP Stock'
+  },
+  {
+    id: 'canned-peeled-tomatoes-italy',
+    name: 'European Canned Whole Peeled Tomatoes',
+    arabicName: 'طماطم إيطالية مقشرة معلبة فاخرة',
+    category: 'edible-oils',
+    origin: 'Italy / Europe',
+    grade: 'Grade A San Marzano Style Plum Tomatoes',
+    moq: '1 FCL (20ft Container / 1,800 Trays)',
+    packagingOptions: ['24 x 400g Easy-Open Cans', '12 x 800g Cans', '6 x 2.5kg / 3kg Foodservice Cans (A10)'],
+    shelfLife: '36 Months',
+    hsCode: '2002.10.00',
+    description: 'Sweet, rich red sun-ripened whole peeled European plum tomatoes packed in thick natural tomato juice. Non-BPA lined cans ideal for pizza sauce, pasta sauces, hotels, and institutional catering.',
+    specs: {
+      purity: '100% Italian/European Tomatoes',
+      brix: 'Min 6.5° - 7.0° Brix',
+      color: 'Intense Natural Ruby Red',
+      admixture: 'Zero Artificial Preservatives or Colors'
+    },
+    certifications: ['EU Organic / Standard Compliant', 'Halal Certified', 'ISO 22000', 'Dubai Municipality FoodWatch Registered'],
+    referencePriceAedPerKg: 4.20,
+    image: 'https://images.unsplash.com/photo-1534483509719-3feaee7c30da?auto=format&fit=crop&w=800&q=85',
+    featured: true,
+    stockStatus: 'Ready DIP Stock'
+  },
+  {
+    id: 'frozen-whole-chicken-griller',
+    name: 'Frozen Whole Chicken Griller (Halal)',
+    arabicName: 'دجاج كامل مجمد حلال (شواية)',
+    category: 'poultry-meat',
+    origin: 'Brazil / Ukraine',
+    grade: 'Grade A SIF Plant Certified',
+    moq: '1 Reefer FCL 40ft (27 Metric Tons)',
+    packagingOptions: ['10 x 1000g Cartons', '10 x 1100g Cartons', '10 x 1200g Master Cartons', 'Polybag Individually Wrapped'],
+    shelfLife: '18 Months at -18°C',
+    hsCode: '0207.12.00',
+    description: '100% manually Islamic slaughtered (Dhabiha Halal) whole griller chicken. Clean plucked, without giblets, heads, or feet. Optimal skin-on white fat layer, compliant with UAE ESMA & GCC GSO 993 Halal guidelines.',
+    specs: {
+      purity: 'Grade A No Bruises / No Black Spots',
+      moisture: 'Max 6.0% Moisture Content',
+      color: 'Clean White / Light Cream Skin',
+      processing: 'Air Chilled / Blast Frozen -35°C',
+      admixture: 'Salmonella & Microbiological Negative'
+    },
+    certifications: ['100% Halal Certified (Fambras / Cibal)', 'SIF Inspection Approved', 'GCC Health Ministry Clearance', 'HACCP & ISO 22000'],
+    referencePriceAedPerKg: 7.95,
+    image: 'https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=800&q=85',
+    featured: true,
+    stockStatus: 'Ready DIP Stock'
+  },
+  {
+    id: 'boneless-chicken-breast-iqf',
+    name: 'Boneless Skinless Chicken Breast (IQF)',
+    arabicName: 'صدور دجاج مجمدة بدون عظم وجلد IQF',
+    category: 'poultry-meat',
+    origin: 'Brazil / Argentina',
+    grade: 'Grade A IQF Single-Cut',
+    moq: '1 Reefer FCL 40ft (26 Metric Tons)',
+    packagingOptions: ['6 x 2kg Polybag (12kg Master Carton)', '4 x 2.5kg Carton', '10kg Bulk Pack'],
+    shelfLife: '18 Months at -18°C',
+    hsCode: '0207.14.00',
+    description: 'Individually Quick Frozen (IQF) tender chicken breast fillet. Trimmed of cartilage and fat. High protein formulation favored by UAE hotel kitchens, catering groups, and fast-casual restaurant chains.',
+    specs: {
+      purity: '99% Visual Lean Fillet',
+      moisture: 'Max 8.0% Absorbed Water',
+      processing: 'Individually Quick Frozen (IQF)',
+      color: 'Natural Pink Flesh',
+      brokenRatio: 'Zero Broken Bone Fragments'
+    },
+    certifications: ['Halal Certified', 'ESMA UAE Approved', 'HACCP', 'BRC Food Safety Standard'],
+    referencePriceAedPerKg: 13.50,
+    image: 'https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=800&q=85',
+    featured: true,
+    stockStatus: 'Ready DIP Stock'
+  },
+  {
+    id: 'frozen-boneless-buffalo-beef',
+    name: 'Halal Boneless Frozen Beef Cuts (Bobby Veal / Silver Side)',
+    arabicName: 'قطع لحم بقري مجمد حلال بدون عظم (سيلفر سايد / توب سايد)',
+    category: 'poultry-meat',
+    origin: 'India / Brazil',
+    grade: 'Export Grade Premium Cuts (Compensated / Silver Side / Topside)',
+    moq: '1 Reefer FCL 40ft (28 Metric Tons)',
+    packagingOptions: ['20kg Master Carton (4x5kg IWP)', '25kg Poly-lined Carton'],
+    shelfLife: '24 Months at -18°C',
+    hsCode: '0202.30.00',
+    description: 'Finest blast-frozen boneless beef primal cuts produced in APEDA and SIF approved export abattoirs. Strict ritual halal slaughtering supervised by certified Islamic authorities. Rich deep color, low fat, and tender yield.',
+    specs: {
+      purity: '95% - 98% Chemical Lean (CL)',
+      moisture: 'Natural Retention (No Added Brine)',
+      color: 'Deep Natural Crimson Red',
+      processing: 'De-boned, De-fatted & Blast Frozen at -40°C',
+      admixture: 'Zero Foreign Matter'
+    },
+    certifications: ['100% Dhabiha Halal Certified', 'APEDA Registered Abattoir', 'Dubai Municipality Food Watch Approved', 'HACCP & ISO 22000'],
+    referencePriceAedPerKg: 14.80,
+    image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=800&q=85',
+    featured: true,
+    stockStatus: 'Jebel Ali Transit'
+  },
+  {
+    id: 'frozen-whole-carcass-lamb-mutton',
+    name: 'Halal Frozen Lamb & Mutton Carcasses',
+    arabicName: 'ذبائح لحم ضأن وغنم مجمدة كاملة حلال',
+    category: 'poultry-meat',
+    origin: 'Australia / New Zealand / India',
+    grade: 'Prime A-Grade 6-Way Cut / Whole Wrapped Carcass (12-18kg avg)',
+    moq: '1 Reefer Container (20 Metric Tons)',
+    packagingOptions: ['Stockinette Cloth Wrapped Whole Carcass', '4-Way Polywrapped Master Carton', '6-Way Commercial Cut Cartons'],
+    shelfLife: '24 Months at -18°C',
+    hsCode: '0204.10.00',
+    description: 'Pasture-raised young lamb and mutton carcasses. Clean, healthy, tender whole carcass wrapped in sterile cotton stockinette with GCC veterinary and Halal stamped authenticity. Ideal for Gulf catering, mandi restaurants, and institutional butchers.',
+    specs: {
+      purity: 'Fat Score 2 to 3 (Balanced Cover)',
+      color: 'Rosy Pink Meat with Firm White Fat',
+      processing: 'Blast Frozen & Suspended Chilled Processing',
+      admixture: 'Clean Trimmed Internal Cavity'
+    },
+    certifications: ['Australian / NZ Halal Authority Certified', 'GCC Veterinary Sanitary Certificate', 'Dubai Municipality Approved', 'ISO 22000'],
+    referencePriceAedPerKg: 21.50,
+    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=85',
     featured: true,
     stockStatus: 'Direct Mill FCL'
   }

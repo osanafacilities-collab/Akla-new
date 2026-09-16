@@ -1,281 +1,346 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Globe2, Ship, Plane, ShieldCheck, Compass, Sparkles, Navigation } from 'lucide-react';
-import { AnimatedCounter } from './AnimatedCounter';
+import { 
+  Globe2, 
+  ArrowRight,
+  Clock,
+  Ship,
+  Truck,
+  MapPin,
+  CheckCircle2,
+  Apple,
+  Beef,
+  Flame,
+  Wheat,
+  Droplet,
+  Package,
+  Layers,
+  Sparkles
+} from 'lucide-react';
 
-export const GlobalTradeSection: React.FC = () => {
-  const [selectedRegion, setSelectedRegion] = useState<string>('MIDDLE EAST');
+interface RegionalCorridor {
+  id: string;
+  title: string;
+  regionBadge: string;
+  flag: string;
+  origins: string;
+  image: string;
+  transit: string;
+  highlightTag: string;
+  items: {
+    name: string;
+    detail: string;
+    tag?: string;
+  }[];
+  format: string;
+}
+
+const REGIONAL_CORRIDORS: RegionalCorridor[] = [
+  {
+    id: 'india-pakistan',
+    title: 'India & Pakistan Direct Sourcing',
+    regionBadge: 'Agro Heartland',
+    flag: '🇮🇳 🇵🇰',
+    origins: 'India & Pakistan',
+    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=85',
+    transit: '3 – 5 Days Direct',
+    highlightTag: 'Fresh & Dry Cargo',
+    items: [
+      { name: 'Fresh Fruits & Vegetables', detail: 'Onions, potatoes, mangoes, ginger, garlic & green chilies (Reefer Sea & Air)' },
+      { name: 'Halal Fresh & Frozen Meat', detail: 'Prime mutton, lamb carcasses & boneless buffalo beef primal cuts' },
+      { name: 'Pulses, Lentils & Chickpeas', detail: 'Chana dal, red lentils (masoor), moong, toor dal & bold chickpeas' },
+      { name: 'Grains & Whole Spices', detail: '1121 XXL Basmati rice, chakki atta, cumin seeds, green cardamom & pepper' },
+      { name: 'Pure Mustard Oil', detail: 'Kachi Ghani cold-pressed pungent mustard oil for cooking & culinary use' },
+    ],
+    format: 'Air Freight, 20ft/40ft Reefer & Dry FCL'
+  },
+  {
+    id: 'brazil',
+    title: 'Brazil Sourcing Hub',
+    regionBadge: 'Poultry & Sugar Leader',
+    flag: '🇧🇷',
+    origins: 'Brazil (Santos & Paranaguá)',
+    image: 'https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=800&q=85',
+    transit: 'Direct Ocean Vessels',
+    highlightTag: 'SIF Halal Certified',
+    items: [
+      { name: 'Halal Frozen Chicken', detail: 'Whole griller chicken (900g–1400g), boneless breast fillets (IQF) & shawarma cuts' },
+      { name: 'Poultry Parts & Wings', detail: 'Mid-joint wings, chicken paws, leg quarters & drumsticks in master cartons' },
+      { name: 'Refined White Sugar (ICUMSA 45)', detail: 'High-purity sparkling cane sugar (50kg PP bags & 1,000kg jumbo totes)' },
+      { name: 'Agricultural Commodities', detail: 'Non-GMO yellow corn grade 2 & high-protein animal feed soybeans' },
+    ],
+    format: '40ft Heavy Reefer Containers & Bulk Ocean Charters'
+  },
+  {
+    id: 'europe',
+    title: 'Europe & Mediterranean Hub',
+    regionBadge: 'Pantry & Edible Oils',
+    flag: '🇪🇺 🇮🇹 🇷🇴',
+    origins: 'Europe & Black Sea Gateway',
+    image: 'https://images.unsplash.com/photo-1534483509719-3feaee7c30da?auto=format&fit=crop&w=800&q=85',
+    transit: '12 – 16 Days Ocean',
+    highlightTag: 'Canned Foods & Oils',
+    items: [
+      { name: 'Canned Food Products', detail: 'Whole peeled plum tomatoes, chopped tomatoes, sweet corn & mushrooms' },
+      { name: 'Canned Legumes & Olives', detail: 'Cooked chickpeas, red kidney beans, green peas & Greek/Spanish olives' },
+      { name: 'Pure Refined Sunflower Oil', detail: '100% refined sunflower oil CP8 (FFA < 0.1%) in PET bottles & flexitanks' },
+      { name: 'Durum Wheat & Pasta Flour', detail: 'High-gluten European milling wheat & semolina for commercial bakeries' },
+    ],
+    format: 'Retail Cans (400g/800g/3kg A10), PET Bottles & FCL'
+  },
+  {
+    id: 'gcc-export',
+    title: 'GCC Regional Overland Fleet',
+    regionBadge: 'Cross-Border Logistics',
+    flag: '🇸🇦 🇴🇲 🇶🇦 🇰🇼',
+    origins: 'UAE to KSA, Oman, Qatar & Kuwait',
+    image: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=85',
+    transit: '24 – 48 Hours Door-to-Door',
+    highlightTag: 'Express Reefer Convoys',
+    items: [
+      { name: 'Kingdom of Saudi Arabia (KSA)', detail: 'Daily overland refrigerated convoys to Riyadh, Dammam, and Jeddah' },
+      { name: 'Sultanate of Oman', detail: 'Express cross-border delivery to Muscat, Sohar, and Salalah distribution centers' },
+      { name: 'Qatar & Kuwait Routes', detail: 'Bonded freight supply to hypermarkets, food service, and wholesale distributors' },
+      { name: 'Dubai Central Warehousing', detail: 'Direct dispatch from our Al Quoz commercial office & central UAE warehouses' },
+    ],
+    format: 'Full Truckload (FTL) & Temperature-Controlled LTL'
+  }
+];
+
+interface GlobalTradeSectionProps {
+  onOpenQuote?: (categoryName?: string) => void;
+}
+
+export const GlobalTradeSection: React.FC<GlobalTradeSectionProps> = ({ onOpenQuote }) => {
+  const [selectedCorridor, setSelectedCorridor] = useState<string>('all');
+
+  const handleInquire = (title?: string) => {
+    if (onOpenQuote) {
+      onOpenQuote(title || 'Global Import/Export');
+    } else {
+      const el = document.getElementById('contact');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const displayedCorridors = selectedCorridor === 'all' 
+    ? REGIONAL_CORRIDORS 
+    : REGIONAL_CORRIDORS.filter(c => c.id === selectedCorridor);
 
   return (
-    <section id="global" className="py-24 lg:py-32 bg-gradient-to-b from-[#133E72] via-[#164E88] to-[#10355E] text-white border-b border-[#C89B3C]/35 relative overflow-hidden">
-      <div className="max-w-[1380px] w-[92%] mx-auto">
+    <section 
+      id="global" 
+      className="scroll-mt-24 py-16 lg:py-24 bg-[#F8FAFC] border-b border-[#E2E8F0] text-[#0F172A] relative"
+    >
+      <div className="max-w-[1360px] w-[92%] mx-auto space-y-10">
         
-        {/* Top Header Grid */}
-        <div className="grid lg:grid-cols-12 gap-8 items-center mb-14">
-          
-          <div className="lg:col-span-7 space-y-3.5">
-            <div className="inline-flex items-center gap-2 text-[#E3BC63] font-black tracking-[2.5px] text-xs uppercase px-3.5 py-1.5 rounded-full bg-[#E3BC63]/15 border border-[#E3BC63]/40">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>GLOBAL TRADE NETWORK</span>
-            </div>
-            <h2 className="text-[34px] sm:text-[46px] lg:text-[54px] leading-[1.08] tracking-tight font-heading font-black text-white">
-              Dubai at the Heart of <br />
-              <span className="text-gold-gradient">Global Food Trade</span>
-            </h2>
-            <p className="text-base sm:text-[17px] text-[#CBD5E1] leading-relaxed max-w-[650px]">
-              Strategically positioned in Dubai, Akla seamlessly links high-yield agricultural producer nations with rapid commercial distribution corridors across the GCC, Asia, Africa, and Europe.
-            </p>
+        {/* Short, Clean Header */}
+        <div className="text-center max-w-[800px] mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 text-[#B45309] font-bold tracking-wider text-xs uppercase px-3.5 py-1 rounded-full bg-[#FFFBEB] border border-[#FCD34D]">
+            <Globe2 className="w-3.5 h-3.5 text-[#D97706]" />
+            <span>GLOBAL IMPORT & EXPORT GATEWAY</span>
           </div>
 
-          <div className="lg:col-span-5 flex items-center lg:justify-end">
-            <div className="bg-[#184E88]/95 backdrop-blur-xl p-6 border border-[#C89B3C]/45 rounded-2xl w-full sm:w-auto shadow-[0_15px_35px_rgba(19,62,114,0.4)]">
-              <div className="font-extrabold text-[11px] tracking-[1.5px] text-[#E3BC63] uppercase mb-3">
-                <span>Select Active Trade Corridors:</span>
-              </div>
-              <div className="flex gap-2 flex-wrap">
-                {['MIDDLE EAST', 'ASIA', 'AFRICA', 'EUROPE'].map((reg) => (
-                  <button
-                    key={reg}
-                    onClick={() => setSelectedRegion(reg)}
-                    className={`px-4 py-2 text-xs font-black rounded-full uppercase tracking-wider transition-all cursor-pointer border ${
-                      selectedRegion === reg
-                        ? 'bg-gradient-to-r from-[#F5D061] to-[#C89B3C] border-transparent text-[#071A2F] shadow-[0_0_15px_rgba(200,155,60,0.5)] scale-105'
-                        : 'border-white/20 text-[#CBD5E1] hover:border-[#E3BC63] hover:text-[#E3BC63]'
-                    }`}
-                  >
-                    {reg}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-black text-[#1B5699]">
+            Direct Global Sourcing & <span className="text-[#C89B3C]">Regional Distribution</span>
+          </h2>
 
-        </div>
+          <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
+            Sourcing fresh produce, Halal meats, poultry, sugar, canned goods, pulses, and oils directly from premier origins into Dubai, with prompt cross-border delivery across the GCC.
+          </p>
 
-        {/* Global Trade Map Canvas */}
-        <div 
-          className="h-[460px] sm:h-[530px] relative rounded-2xl overflow-hidden border border-[#C89B3C]/40 shadow-[0_25px_60px_rgba(19,62,114,0.4)]"
-          style={{
-            background: 'radial-gradient(circle at 57% 48%, #1F5F9E 0%, #144275 60%, #0F3158 100%)'
-          }}
-        >
-          {/* Real-Time Live Shipping Telemetry Bar across top of map */}
-          <div className="absolute top-0 left-0 right-0 z-30 bg-[#0E2C4E]/90 backdrop-blur-md border-b border-[#C89B3C]/35 px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs text-white/90 overflow-x-auto whitespace-nowrap gap-6 scrollbar-none">
-            <div className="flex items-center gap-2 text-[#E3BC63] font-black tracking-wider text-[11px] uppercase shrink-0">
-              <span>LIVE VESSEL &amp; ROAD TELEMETRY:</span>
-            </div>
-            <div className="flex items-center gap-6 text-[11.5px] text-[#CBD5E1] font-mono">
-              <span className="flex items-center gap-1.5 text-white/95">
-                <Ship className="w-3.5 h-3.5 text-[#FDE68A]" />
-                <span>M/V MAERSK ARABIA &bull; 2,400 MT Basmati Rice &bull; Discharging Jebel Ali Berth 14</span>
-              </span>
-              <span className="text-white/30">&bull;</span>
-              <span className="flex items-center gap-1.5 text-white/95">
-                <Plane className="w-3.5 h-3.5 text-[#FDE68A]" />
-                <span>EK Cargo 904 &bull; Fresh Organic Produce &bull; Customs Cleared DXB DWC</span>
-              </span>
-              <span className="text-white/30">&bull;</span>
-              <span className="flex items-center gap-1.5 text-white/95">
-                <Navigation className="w-3.5 h-3.5 text-[#FDE68A]" />
-                <span>Overland Convoy TX-4 &bull; 180 MT Sunflower Oil &bull; Dispatched for Riyadh &amp; Muscat</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Subtle World Grid Lines */}
-          <div className="absolute inset-0 opacity-15 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] [background-size:60px_60px]" />
-
-          {/* SVG Animated Route Lines with dynamic flow */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 500" preserveAspectRatio="none">
-            {/* Europe to Dubai */}
-            <path 
-              d="M280,180 Q400,160 570,240" 
-              stroke="#F5D061" 
-              strokeWidth="2.5" 
-              strokeDasharray="8 6" 
-              fill="none" 
-              className="animate-trade-flow drop-shadow-[0_0_10px_rgba(227,188,99,0.8)]"
-            />
-            {/* Africa to Dubai */}
-            <path 
-              d="M400,340 Q480,310 570,240" 
-              stroke="#F5D061" 
-              strokeWidth="2.5" 
-              strokeDasharray="8 6" 
-              fill="none" 
-              className="animate-trade-flow drop-shadow-[0_0_10px_rgba(227,188,99,0.8)]"
-            />
-            {/* Asia to Dubai */}
-            <path 
-              d="M790,260 Q680,210 570,240" 
-              stroke="#F5D061" 
-              strokeWidth="2.5" 
-              strokeDasharray="8 6" 
-              fill="none" 
-              className="animate-trade-flow drop-shadow-[0_0_10px_rgba(227,188,99,0.8)]"
-            />
-            {/* Middle East to Dubai */}
-            <path 
-              d="M500,220 Q530,220 570,240" 
-              stroke="#F5D061" 
-              strokeWidth="2.5" 
-              strokeDasharray="8 6" 
-              fill="none" 
-              className="animate-trade-flow drop-shadow-[0_0_10px_rgba(227,188,99,0.8)]"
-            />
-
-            {/* Moving Ship 1 on Asia corridor */}
-            <motion.circle 
-              r="4.5"
-              fill="#FFFFFF"
-              stroke="#E3BC63"
-              strokeWidth="2"
-              animate={{ 
-                cx: [790, 680, 570], 
-                cy: [260, 210, 240],
-                opacity: [0.3, 1, 0.3]
-              }}
-              transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
-            />
-
-            {/* Moving Ship 2 on Europe corridor */}
-            <motion.circle 
-              r="4.5"
-              fill="#FFFFFF"
-              stroke="#E3BC63"
-              strokeWidth="2"
-              animate={{ 
-                cx: [280, 400, 570], 
-                cy: [180, 160, 240],
-                opacity: [0.3, 1, 0.3]
-              }}
-              transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
-            />
-
-            {/* Moving Vessel on Africa corridor */}
-            <motion.circle 
-              r="4.5"
-              fill="#FFFFFF"
-              stroke="#E3BC63"
-              strokeWidth="2"
-              animate={{ 
-                cx: [400, 480, 570], 
-                cy: [340, 310, 240],
-                opacity: [0.3, 1, 0.3]
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            />
-          </svg>
-
-          {/* Central Dubai Hub with Multiple Expanding Radar Waves */}
-          <div className="absolute left-[57%] top-[48%] -translate-x-1/2 -translate-y-1/2 z-20">
-            <div className="relative flex flex-col items-center">
-              {/* Expanding Radar Waves */}
-              <div className="absolute w-12 h-12 rounded-full border-2 border-[#E3BC63]/70 animate-radar pointer-events-none -mt-3" />
-              <div className="absolute w-20 h-20 rounded-full border border-[#E3BC63]/40 animate-radar pointer-events-none -mt-7" style={{ animationDelay: '1.4s' }} />
-
-              <div className="w-7 h-7 rounded-full bg-white shadow-[0_0_0_12px_rgba(200,155,60,0.5)] border-3 border-[#E3BC63] z-10 flex items-center justify-center">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#133E72]" />
-              </div>
-              <div className="mt-3 whitespace-nowrap text-[#FDE68A] font-black text-xs sm:text-[13px] tracking-wider uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] bg-[#133E72]/95 px-3.5 py-1.5 rounded-full border border-[#C89B3C]/70 shadow-xl">
-                DUBAI &bull; UAE (CENTRAL HUB)
-              </div>
-            </div>
-          </div>
-
-          {/* Europe Hub */}
-          <div className="absolute left-[28%] top-[36%] -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer group" onClick={() => setSelectedRegion('EUROPE')}>
-            <div className="w-4 h-4 rounded-full bg-[#E3BC63] shadow-[0_0_0_8px_rgba(227,188,99,0.3)] group-hover:scale-130 transition-transform" />
-            <div className="mt-2 text-center text-white font-extrabold text-[11px] tracking-wider uppercase group-hover:text-[#E3BC63] bg-[#0E2C4E]/85 px-2 py-0.5 rounded backdrop-blur-xs">
-              EUROPE
-            </div>
-          </div>
-
-          {/* Africa Hub */}
-          <div className="absolute left-[40%] top-[68%] -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer group" onClick={() => setSelectedRegion('AFRICA')}>
-            <div className="w-4 h-4 rounded-full bg-[#E3BC63] shadow-[0_0_0_8px_rgba(227,188,99,0.3)] group-hover:scale-130 transition-transform" />
-            <div className="mt-2 text-center text-white font-extrabold text-[11px] tracking-wider uppercase group-hover:text-[#E3BC63] bg-[#0E2C4E]/85 px-2 py-0.5 rounded backdrop-blur-xs">
-              AFRICA
-            </div>
-          </div>
-
-          {/* Asia Hub */}
-          <div className="absolute left-[79%] top-[52%] -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer group" onClick={() => setSelectedRegion('ASIA')}>
-            <div className="w-4 h-4 rounded-full bg-[#E3BC63] shadow-[0_0_0_8px_rgba(227,188,99,0.3)] group-hover:scale-130 transition-transform" />
-            <div className="mt-2 text-center text-white font-extrabold text-[11px] tracking-wider uppercase group-hover:text-[#E3BC63] bg-[#0E2C4E]/85 px-2 py-0.5 rounded backdrop-blur-xs">
-              ASIA
-            </div>
-          </div>
-
-          {/* Middle East Hub */}
-          <div className="absolute left-[50%] top-[44%] -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer group" onClick={() => setSelectedRegion('MIDDLE EAST')}>
-            <div className="w-4 h-4 rounded-full bg-[#E3BC63] shadow-[0_0_0_8px_rgba(227,188,99,0.3)] group-hover:scale-130 transition-transform" />
-            <div className="mt-2 text-center text-white font-extrabold text-[11px] tracking-wider uppercase group-hover:text-[#E3BC63] bg-[#0E2C4E]/85 px-2 py-0.5 rounded backdrop-blur-xs">
-              MIDDLE EAST
-            </div>
-          </div>
-
-        </div>
-
-        {/* 4 Live Running Number Telemetry Metric Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mt-8">
-          {[
-            {
-              title: 'Active Trade Corridors',
-              to: 40,
-              suffix: '+',
-              icon: <Globe2 className="w-5 h-5 text-[#E3BC63]" />,
-              desc: 'Connecting Asia, GCC, Africa, & Europe',
-            },
-            {
-              title: 'Live Tonnage In-Transit',
-              to: 24500,
-              suffix: ' MT',
-              icon: <Ship className="w-5 h-5 text-[#E3BC63]" />,
-              desc: 'Ocean FCL & GCC Overland Reefers',
-            },
-            {
-              title: 'Liner & Feeder Vessels',
-              to: 18,
-              suffix: ' Active',
-              icon: <Compass className="w-5 h-5 text-[#E3BC63]" />,
-              desc: 'Continuous Jebel Ali Berth Operations',
-            },
-            {
-              title: 'FoodWatch & Customs',
-              to: 100,
-              suffix: '% Compliant',
-              icon: <ShieldCheck className="w-5 h-5 text-[#E3BC63]" />,
-              desc: 'Dubai Municipality Lab Certified',
-            },
-          ].map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: idx * 0.08 }}
-              whileHover={{ y: -4, scale: 1.02 }}
-              className="p-6 rounded-2xl bg-[#144275]/80 backdrop-blur-xl border border-[#C89B3C]/40 shadow-[0_8px_25px_rgba(19,62,114,0.3)] flex flex-col justify-between luxury-sheen group"
+          {/* Quick Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-2 pt-2">
+            <button
+              type="button"
+              onClick={() => setSelectedCorridor('all')}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                selectedCorridor === 'all'
+                  ? 'bg-[#1B5699] text-white shadow-xs'
+                  : 'bg-white text-[#475569] border border-[#CBD5E1] hover:bg-[#F1F5F9]'
+              }`}
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-xl bg-[#1A5393] border border-[#C89B3C]/50 flex items-center justify-center shadow-xs group-hover:scale-110 group-hover:rotate-6 transition-all">
-                  {item.icon}
+              All Origins (4)
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedCorridor('india-pakistan')}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedCorridor === 'india-pakistan'
+                  ? 'bg-[#1B5699] text-white shadow-xs'
+                  : 'bg-white text-[#475569] border border-[#CBD5E1] hover:bg-[#F1F5F9]'
+              }`}
+            >
+              <span>🇮🇳 🇵🇰 India & Pakistan</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedCorridor('brazil')}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedCorridor === 'brazil'
+                  ? 'bg-[#1B5699] text-white shadow-xs'
+                  : 'bg-white text-[#475569] border border-[#CBD5E1] hover:bg-[#F1F5F9]'
+              }`}
+            >
+              <span>🇧🇷 Brazil (Chicken & Sugar)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedCorridor('europe')}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedCorridor === 'europe'
+                  ? 'bg-[#1B5699] text-white shadow-xs'
+                  : 'bg-white text-[#475569] border border-[#CBD5E1] hover:bg-[#F1F5F9]'
+              }`}
+            >
+              <span>🇪🇺 Europe (Canned Foods & Oils)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedCorridor('gcc-export')}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedCorridor === 'gcc-export'
+                  ? 'bg-[#1B5699] text-white shadow-xs'
+                  : 'bg-white text-[#475569] border border-[#CBD5E1] hover:bg-[#F1F5F9]'
+              }`}
+            >
+              <span>🇸🇦 GCC Overland Fleet</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Dynamic Cards Grid */}
+        <div className={`grid grid-cols-1 ${displayedCorridors.length === 1 ? 'max-w-2xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-4'} gap-6`}>
+          {displayedCorridors.map((corridor) => (
+            <div
+              key={corridor.id}
+              className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+            >
+              {/* Photo & Header Badge */}
+              <div className="relative h-48 overflow-hidden bg-[#071A2F]">
+                <img
+                  src={corridor.image}
+                  alt={corridor.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                
+                {/* Transit & Region Tag */}
+                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                  <span className="px-2.5 py-0.5 rounded-lg bg-white/95 text-[#1B5699] text-[11px] font-bold shadow-xs">
+                    {corridor.highlightTag}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-lg bg-[#071A2F]/90 text-white text-[11px] font-bold flex items-center gap-1 border border-white/20">
+                    <Clock className="w-3 h-3 text-[#C89B3C]" />
+                    <span>{corridor.transit}</span>
+                  </span>
                 </div>
+
+                {/* Country flags & Title */}
+                <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-white/90 mb-0.5">
+                    <span className="text-base">{corridor.flag}</span>
+                    <span>{corridor.origins}</span>
+                  </div>
+                  <h3 className="text-lg font-heading font-black text-white leading-snug">
+                    {corridor.title}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Card Body with specific items */}
+              <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-4">
+                
+                {/* Items List */}
+                <div className="space-y-2.5">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-[#64748B] block">
+                    Key Commodities & Products:
+                  </span>
+                  {corridor.items.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2 text-xs">
+                      <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="font-bold text-[#0F172A] block leading-tight">
+                          {item.name}
+                        </strong>
+                        <span className="text-[11px] text-[#64748B] leading-tight block mt-0.5">
+                          {item.detail}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Logistics & Shipping Format */}
+                <div className="pt-3 border-t border-[#F1F5F9] space-y-3">
+                  <div className="bg-[#F8FAFC] p-2.5 rounded-xl border border-[#E2E8F0]">
+                    <span className="text-[10px] font-bold uppercase text-[#64748B] block">
+                      Packaging & Loading:
+                    </span>
+                    <span className="text-xs font-semibold text-[#1B5699] block mt-0.5">
+                      {corridor.format}
+                    </span>
+                  </div>
+
+                  {/* Quick Action Button */}
+                  <button
+                    type="button"
+                    onClick={() => handleInquire(corridor.title)}
+                    className="w-full py-2.5 px-3 bg-[#1B5699] hover:bg-[#133F72] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs"
+                  >
+                    <span>Request Rates</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 3-Point Fast Summary Strip with Al Quoz Office Mention */}
+        <div className="bg-white rounded-2xl border border-[#CBD5E1] p-5 sm:p-6 shadow-xs">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#1B5699]/10 text-[#1B5699] flex items-center justify-center shrink-0">
+                <MapPin className="w-5 h-5 text-[#C89B3C]" />
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-heading font-black text-white tracking-tight flex items-baseline gap-1">
-                  <AnimatedCounter to={item.to} suffix={item.suffix} duration={2000} />
-                </div>
-                <div className="text-xs font-bold uppercase tracking-wider text-[#FDE68A] mt-1">
-                  {item.title}
-                </div>
-                <p className="text-[12px] text-[#CBD5E1] mt-1.5 leading-snug">
-                  {item.desc}
+                <h4 className="font-bold text-sm text-[#0F172A]">Al Quoz Commercial Office</h4>
+                <p className="text-xs text-[#475569] mt-0.5 leading-relaxed">
+                  Centrally located in Al Quoz, Dubai for corporate contracts, product samples & trade inquiries.
                 </p>
               </div>
-            </motion.div>
-          ))}
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#1B5699]/10 text-[#1B5699] flex items-center justify-center shrink-0">
+                <Ship className="w-5 h-5 text-[#C89B3C]" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-[#0F172A]">Direct Origin Milling</h4>
+                <p className="text-xs text-[#475569] mt-0.5 leading-relaxed">
+                  Direct contracts with certified farm cooperatives, poultry abattoirs, and edible oil processors.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#1B5699]/10 text-[#1B5699] flex items-center justify-center shrink-0">
+                <Truck className="w-5 h-5 text-[#C89B3C]" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-[#0F172A]">Cross-Border GCC Fleet</h4>
+                <p className="text-xs text-[#475569] mt-0.5 leading-relaxed">
+                  Fast 24–48 hour refrigerated overland dispatch directly to Saudi Arabia, Oman, Qatar, and Kuwait.
+                </p>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>

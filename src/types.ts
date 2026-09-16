@@ -6,6 +6,7 @@ export type ProductCategory =
   | 'edible-oils'
   | 'dry-fruits-nuts'
   | 'sugar-salt'
+  | 'poultry-meat'
   | 'canned-packaged';
 
 export interface Product {
@@ -29,6 +30,7 @@ export interface Product {
     admixture?: string;
     processing?: string;
     freeFattyAcids?: string;
+    brix?: string;
   };
   certifications: string[];
   referencePriceAedPerKg?: number; // approximate wholesale guide

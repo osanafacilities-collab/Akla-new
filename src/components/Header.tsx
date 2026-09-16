@@ -42,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'about', label: 'About Us' },
     { id: 'products', label: 'Products', hasDropdown: true },
     { id: 'wholesale', label: 'Wholesale' },
-    { id: 'wholesale', label: 'Retail' },
+    { id: 'retail', label: 'Retail' },
     { id: 'global', label: 'Import & Export' },
     { id: 'why', label: 'Why Us' },
     { id: 'contact', label: 'Contact' },
@@ -55,10 +55,18 @@ export const Header: React.FC<HeaderProps> = ({
     { code: 'FR', label: 'Français' },
   ];
 
+  const handleMobileNav = (sectionId: string) => {
+    setMobileMenuOpen(false);
+    // Allow the drawer closing transition to start, then scroll to section
+    setTimeout(() => {
+      onNavigate(sectionId);
+    }, 80);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* Top Main Navigation Bar with subtle gold bottom accent border */}
-      <div className="bg-gradient-to-r from-[#123E6D] via-[#164D88] to-[#123E6D] backdrop-blur-xl border-b border-[#C89B3C]/40 text-white shadow-[0_4px_30px_rgba(19,62,114,0.3)]">
+      <div className="bg-gradient-to-r from-[#1A5495] via-[#2167B4] to-[#1A5495] backdrop-blur-xl border-b border-[#C89B3C]/40 text-white shadow-[0_4px_30px_rgba(27,86,153,0.3)]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 h-[86px] flex items-center justify-between">
           
           {/* Brand Logo matching screenshot */}
@@ -100,7 +108,7 @@ export const Header: React.FC<HeaderProps> = ({
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 6 }}
                           transition={{ duration: 0.18 }}
-                          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-[#123E6D]/98 backdrop-blur-2xl border border-[#C89B3C]/45 rounded-md shadow-[0_20px_50px_rgba(19,62,114,0.4)] py-2 z-50 overflow-hidden"
+                          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-[#1A5495]/98 backdrop-blur-2xl border border-[#C89B3C]/45 rounded-md shadow-[0_20px_50px_rgba(27,86,153,0.4)] py-2 z-50 overflow-hidden"
                         >
                           <div className="px-4 py-2 border-b border-white/10 text-[11px] font-bold uppercase tracking-wider text-[#E3BC63] flex items-center justify-between">
                             <span>Our Food Categories</span>
@@ -171,7 +179,7 @@ export const Header: React.FC<HeaderProps> = ({
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 4 }}
-                    className="absolute right-0 mt-2 w-32 bg-[#123E6D]/98 backdrop-blur-xl border border-[#C89B3C]/45 rounded-md shadow-xl py-1 z-50"
+                    className="absolute right-0 mt-2 w-32 bg-[#1A5495]/98 backdrop-blur-xl border border-[#C89B3C]/45 rounded-md shadow-xl py-1 z-50"
                   >
                     {languages.map((l) => (
                       <button
@@ -236,23 +244,28 @@ export const Header: React.FC<HeaderProps> = ({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden bg-gradient-to-b from-[#123E6D] to-[#0F3158] backdrop-blur-2xl border-b border-[#C89B3C]/40 text-white overflow-hidden shadow-2xl"
+            className="xl:hidden bg-gradient-to-b from-[#1A5495] to-[#144275] backdrop-blur-2xl border-b border-[#C89B3C]/40 text-white overflow-hidden shadow-2xl"
           >
             <div className="px-6 py-6 space-y-4">
-              <div className="grid grid-cols-2 gap-3 text-sm font-medium">
-                {navLinks.map((link, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      onNavigate(link.id);
-                    }}
-                    className="p-2.5 text-left rounded-lg bg-white/5 hover:bg-[#C89B3C]/15 hover:text-[#E3BC63] transition-colors"
-                  >
-                    {link.label}
-                  </button>
-                ))}
+              <div className="grid grid-cols-2 gap-2.5 text-sm font-medium">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.id;
+                  return (
+                    <button
+                      key={link.id + link.label}
+                      type="button"
+                      onClick={() => handleMobileNav(link.id)}
+                      className={`p-3 text-left rounded-xl transition-all flex items-center justify-between text-xs sm:text-sm cursor-pointer ${
+                        isActive
+                          ? 'bg-gradient-to-r from-[#F5D061] to-[#C89B3C] text-[#071A2F] font-bold shadow-md'
+                          : 'bg-white/10 text-white hover:bg-[#C89B3C]/20 hover:text-[#E3BC63]'
+                      }`}
+                    >
+                      <span className="truncate">{link.label}</span>
+                      <span className={`text-[10px] ${isActive ? 'text-[#071A2F]' : 'text-[#E3BC63] opacity-70'}`}>&rarr;</span>
+                    </button>
+                  );
+                })}
               </div>
 
               <div className="pt-3 border-t border-white/10 flex items-center justify-between">

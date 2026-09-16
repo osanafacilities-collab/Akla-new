@@ -72,7 +72,7 @@ export const AboutAndCertifications: React.FC = () => {
                   Established in Dubai, <strong className="text-[#0D1C15]">Akla Foodstuff Trading LLC</strong> operates as a leading wholesale importer, stockist, and regional distributor of high-grade agro-commodities and institutional food essentials.
                 </p>
                 <p>
-                  With our commercial sales office in the historic Al Ras Food Market in Deira and extensive climate-controlled warehousing in Dubai Investment Park (DIP), we bridge leading farm cooperatives and mills in India, Pakistan, Australia, Canada, and Southeast Asia directly with hypermarkets, wholesalers, and catering corporations across the UAE and GCC.
+                  With our commercial sales office in the vibrant Al Quoz area in Dubai and extensive climate-controlled warehousing in Dubai, we bridge leading farm cooperatives and mills in India, Pakistan, Australia, Canada, and Southeast Asia directly with hypermarkets, wholesalers, and catering corporations across the UAE and GCC.
                 </p>
                 <p>
                   Every consignment handled by Akla meets stringent food safety criteria and Gulf Standardization Organization (GSO) health standards, backed by full Dubai Municipality approval.
