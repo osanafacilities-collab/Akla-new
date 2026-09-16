@@ -14,6 +14,13 @@ if os.path.exists(public_htaccess):
     shutil.copyfile(public_htaccess, dist_htaccess)
     print("✓ Copied optimized .htaccess to dist/")
 
+# Also ensure latest site-content.json from public/ is in dist/
+public_content = os.path.join(public_dir, 'site-content.json')
+dist_content = os.path.join(dist_dir, 'site-content.json')
+if os.path.exists(public_content):
+    shutil.copyfile(public_content, dist_content)
+    print("✓ Copied latest site-content.json to dist/")
+
 # 2. Clean up any existing zip files in dist/ before compressing
 for item in os.listdir(dist_dir):
     if item.endswith('.zip'):

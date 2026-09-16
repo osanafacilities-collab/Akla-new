@@ -12,11 +12,16 @@ import {
   Download,
   Save,
   Layers,
-  Server
+  Server,
+  X
 } from 'lucide-react';
 import { HostingerDeployModal } from './HostingerDeployModal';
 
-export const VisualEditorBar: React.FC = () => {
+interface VisualEditorBarProps {
+  onCloseEditor?: () => void;
+}
+
+export const VisualEditorBar: React.FC<VisualEditorBarProps> = ({ onCloseEditor }) => {
   const { 
     isEditMode, 
     toggleEditMode, 
@@ -29,6 +34,12 @@ export const VisualEditorBar: React.FC = () => {
 
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isHostingerModalOpen, setIsHostingerModalOpen] = useState(false);
+
+  const handleOpenHostingerModal = async () => {
+    // Silently save before opening to guarantee fresh bundle
+    saveToServer().catch(() => {});
+    setIsHostingerModalOpen(true);
+  };
 
   return (
     <>
@@ -136,7 +147,7 @@ export const VisualEditorBar: React.FC = () => {
                 {/* Hostinger Deploy Package */}
                 <button
                   type="button"
-                  onClick={() => setIsHostingerModalOpen(true)}
+                  onClick={handleOpenHostingerModal}
                   className="px-2.5 sm:px-3 py-1.5 bg-gradient-to-r from-[#C89B3C] to-[#E3BC63] hover:from-[#DBAA43] hover:to-[#F5D061] text-[#071A2F] rounded-lg text-xs font-black flex items-center gap-1.5 cursor-pointer transition-all shadow-md hover:scale-105"
                   title="Hostinger 1-Click Deployment Suite & ZIP"
                 >
@@ -163,6 +174,18 @@ export const VisualEditorBar: React.FC = () => {
                 >
                   <ChevronDown className="w-4 h-4" />
                 </button>
+
+                {/* Close/Hide Editor for clean view */}
+                {onCloseEditor && (
+                  <button
+                    type="button"
+                    onClick={onCloseEditor}
+                    className="p-1.5 hover:bg-red-500/20 text-white/60 hover:text-red-300 rounded-lg transition-colors cursor-pointer"
+                    title="Hide Editor (View Clean Public Website)"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
               </div>
 
             </div>

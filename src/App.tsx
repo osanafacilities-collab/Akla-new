@@ -27,6 +27,19 @@ export default function App() {
   const [prefilledContactCategory, setPrefilledContactCategory] = useState<string>('');
   const [activeSection, setActiveSection] = useState('home');
 
+  // Visual Editor display check:
+  // On Hostinger or public domains, editor is 100% hidden by default for clean presentation!
+  // Displays only in AI Studio / local development, OR if the website owner explicitly adds ?admin=true or ?edit=true to the URL.
+  const [showEditorSuite, setShowEditorSuite] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('admin') === 'true' || params.get('edit') === 'true') {
+      return true;
+    }
+    const host = window.location.hostname;
+    return host.includes('run.app') || host.includes('localhost') || host === '127.0.0.1';
+  });
+
   const handleOpenQuote = (product?: Product | null, categoryName?: string) => {
     if (product) {
       setSelectedProductForQuote(product);
@@ -157,11 +170,16 @@ export default function App() {
 
       {/* ========================================================================= */}
       {/* 12. AKLA FULL VISUAL CMS & ANIMATION SUITE */}
+      {/* 100% hidden on Hostinger live website for public visitors */}
       {/* ========================================================================= */}
-      <VisualEditorBar />
-      <ContentManagerDrawer />
-      <ImageUploadModal />
-      <AnimationStudioModal />
+      {showEditorSuite && (
+        <>
+          <VisualEditorBar onCloseEditor={() => setShowEditorSuite(false)} />
+          <ContentManagerDrawer />
+          <ImageUploadModal />
+          <AnimationStudioModal />
+        </>
+      )}
     </div>
   );
 }

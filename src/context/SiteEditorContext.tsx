@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { AKLA_CATEGORIES, AklaCategory } from '../data/aklaCategories';
 import { COMPANY_INFO } from '../data/companyInfo';
+import bundledSiteContent from '../data/siteContent.json';
 
 export interface AnimationSettings {
   enabled: boolean;
@@ -301,6 +302,56 @@ export const SiteEditorProvider: React.FC<{ children: ReactNode }> = ({ children
     }
   }, [content]);
 
+  // If running on a live domain (like Hostinger), fetch /site-content.json to revalidate
+  useEffect(() => {
+    fetch('/site-content.json')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data && typeof data === 'object') {
+          setContent((prev) => {
+            const isLiveDomain = typeof window !== 'undefined' && 
+              !window.location.hostname.includes('run.app') && 
+              !window.location.hostname.includes('localhost') &&
+              window.location.hostname !== '127.0.0.1';
+
+            const hasSavedLocal = !!localStorage.getItem(STORAGE_KEY);
+            // On Hostinger or if no local overrides exist, load server JSON
+            if (isLiveDomain || !hasSavedLocal) {
+              return {
+                ...prev,
+                ...data,
+                company: { ...prev.company, ...(data.company || {}) },
+                hero: { ...prev.hero, ...(data.hero || {}) },
+                about: { ...prev.about, ...(data.about || {}) },
+                wholesaleSplit: { ...prev.wholesaleSplit, ...(data.wholesaleSplit || {}) },
+                whyChooseUs: { ...prev.whyChooseUs, ...(data.whyChooseUs || {}) },
+                cta: { ...prev.cta, ...(data.cta || {}) },
+                categories: data.categories && data.categories.length ? data.categories : prev.categories,
+                customImages: data.customImages || prev.customImages,
+                animations: { ...prev.animations, ...(data.animations || {}) },
+              };
+            }
+            return prev;
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  // Auto-sync: If in preview environment and has custom edits in localStorage,
+  // silently sync them to the server so they get baked into the code and ZIP automatically!
+  useEffect(() => {
+    const isPreview = typeof window !== 'undefined' && 
+      (window.location.hostname.includes('run.app') || window.location.hostname.includes('localhost'));
+    if (isPreview && localStorage.getItem(STORAGE_KEY)) {
+      fetch('/api/save-site-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(content, null, 2),
+      }).catch(() => {});
+    }
+  }, []);
+
   const saveToServer = useCallback(async (): Promise<boolean> => {
     setIsSaving(true);
     try {
@@ -310,7 +361,7 @@ export const SiteEditorProvider: React.FC<{ children: ReactNode }> = ({ children
         body: JSON.stringify(content, null, 2),
       });
       if (res.ok) {
-        showToast('All changes saved to website code!');
+        showToast('All changes saved & Hostinger deployment package updated!');
         setHasUnsavedChanges(false);
         setIsSaving(false);
         return true;

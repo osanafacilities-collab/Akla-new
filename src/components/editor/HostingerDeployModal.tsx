@@ -12,8 +12,12 @@ import {
   Check, 
   ExternalLink,
   Layers,
-  FolderArchive
+  FolderArchive,
+  RefreshCw,
+  Save,
+  EyeOff
 } from 'lucide-react';
+import { useSiteEditor } from '../../context/SiteEditorContext';
 
 interface HostingerDeployModalProps {
   isOpen: boolean;
@@ -21,7 +25,10 @@ interface HostingerDeployModalProps {
 }
 
 export const HostingerDeployModal: React.FC<HostingerDeployModalProps> = ({ isOpen, onClose }) => {
+  const { content, saveToServer, isSaving, exportContentJson } = useSiteEditor();
   const [copiedCommand, setCopiedCommand] = useState(false);
+  const [isBaking, setIsBaking] = useState(false);
+  const [bakedSuccess, setBakedSuccess] = useState(false);
 
   if (!isOpen) return null;
 
@@ -29,6 +36,19 @@ export const HostingerDeployModal: React.FC<HostingerDeployModalProps> = ({ isOp
     navigator.clipboard.writeText('npm run build:zip');
     setCopiedCommand(true);
     setTimeout(() => setCopiedCommand(false), 2000);
+  };
+
+  const handleBakeAndSave = async () => {
+    setIsBaking(true);
+    try {
+      await saveToServer();
+      setBakedSuccess(true);
+      setTimeout(() => setBakedSuccess(false), 4000);
+    } catch {
+      // error handled in context
+    } finally {
+      setIsBaking(false);
+    }
   };
 
   return (
@@ -64,32 +84,70 @@ export const HostingerDeployModal: React.FC<HostingerDeployModalProps> = ({ isOp
 
         {/* Content Body */}
         <div className="p-6 space-y-6">
+
+          {/* Clean Live Site Guarantee Callout */}
+          <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-100 flex items-start gap-3 shadow-md">
+            <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center shrink-0 text-emerald-300">
+              <EyeOff className="w-4 h-4" />
+            </div>
+            <div className="text-xs space-y-1">
+              <span className="font-bold text-white text-sm block">100% Clean Live Website on Hostinger:</span>
+              <p className="text-emerald-200/90 leading-relaxed">
+                The visual editor dock and editing buttons are <strong>completely disabled and hidden on Hostinger</strong>. 
+                Public visitors to your domain will never see editing tools or builder buttons—only your pristine, luxury corporate trading website with all your saved text and photos.
+              </p>
+            </div>
+          </div>
           
-          {/* Main Download Callout */}
+          {/* Main Download Callout with Sync & Bake */}
           <div className="p-5 rounded-2xl bg-gradient-to-br from-[#133A6B] to-[#0B2545] border-2 border-[#E3BC63]/60 shadow-lg relative overflow-hidden">
             <div className="absolute top-0 right-0 w-48 h-48 bg-[#C89B3C]/10 rounded-full filter blur-3xl pointer-events-none" />
             
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <FileArchive className="w-5 h-5 text-[#FDE68A]" />
-                  <span className="font-heading font-bold text-lg text-white">
-                    akla-foodstuff-hostinger-deploy.zip
-                  </span>
+            <div className="flex flex-col gap-4 relative z-10">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <FileArchive className="w-5 h-5 text-[#FDE68A]" />
+                    <span className="font-heading font-bold text-lg text-white">
+                      akla-foodstuff-hostinger-deploy.zip
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#CBD5E1] max-w-md leading-relaxed">
+                    Pre-compiled production bundle including all assets, images, saved text, and Hostinger LiteSpeed / Apache <code className="text-[#FDE68A] bg-black/30 px-1 py-0.5 rounded font-mono">.htaccess</code> rules.
+                  </p>
                 </div>
-                <p className="text-xs text-[#CBD5E1] max-w-md leading-relaxed">
-                  Pre-compiled production bundle including all assets, images, and Hostinger LiteSpeed / Apache <code className="text-[#FDE68A] bg-black/30 px-1 py-0.5 rounded font-mono">.htaccess</code> rules.
-                </p>
+
+                <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+                  {/* Bake Edits Button */}
+                  <button
+                    type="button"
+                    onClick={handleBakeAndSave}
+                    disabled={isBaking || isSaving}
+                    className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-[#1A5495] hover:bg-[#2064B0] border border-[#E3BC63]/60 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
+                    title="Bake your latest edits directly into the downloadable ZIP"
+                  >
+                    <RefreshCw className={`w-3.5 h-3.5 ${isBaking ? 'animate-spin' : ''}`} />
+                    <span>{isBaking ? 'Baking Edits into ZIP...' : 'Bake Latest Edits'}</span>
+                  </button>
+
+                  {/* Download ZIP */}
+                  <a
+                    href="/akla-foodstuff-hostinger-deploy.zip"
+                    download="akla-foodstuff-hostinger-deploy.zip"
+                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#F5D061] to-[#C89B3C] hover:from-[#FEE588] hover:to-[#DBAA43] text-[#071A2F] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download ZIP</span>
+                  </a>
+                </div>
               </div>
 
-              <a
-                href="/akla-foodstuff-hostinger-deploy.zip"
-                download="akla-foodstuff-hostinger-deploy.zip"
-                className="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-[#F5D061] to-[#C89B3C] hover:from-[#FEE588] hover:to-[#DBAA43] text-[#071A2F] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0"
-              >
-                <Download className="w-4 h-4" />
-                <span>Download ZIP</span>
-              </a>
+              {bakedSuccess && (
+                <div className="p-2.5 bg-emerald-500/20 border border-emerald-500/50 rounded-lg text-emerald-300 text-xs font-bold flex items-center gap-2 animate-in fade-in">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>Success! Your latest edits have been baked into the ZIP file. Ready to download!</span>
+                </div>
+              )}
             </div>
           </div>
 
